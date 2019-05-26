@@ -1,0 +1,3 @@
+rootProject.name = 'zemoga_mobile_test'
+
+include ':app'
