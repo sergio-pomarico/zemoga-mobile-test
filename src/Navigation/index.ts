@@ -1,5 +1,7 @@
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
+import { Colors } from '../Themes'
+
 // Screens
 import PostsScreen from '../Screens/Posts';
 import SinglePostScreen from '../Screens/SinglePost';
@@ -12,10 +14,10 @@ const rootNavigation = createStackNavigator(
   {
     initialRouteName: 'Posts',
     defaultNavigationOptions: {
-      // headerStyle: {
-      //   backgroundColor: Colors.green,
-      // },
-      // headerTintColor: Colors.snow,
+      headerStyle: {
+        backgroundColor: Colors.primaryColor,
+      },
+      headerTintColor: Colors.primaryColorText,
       headerBackTitle: null,
     },
   }
