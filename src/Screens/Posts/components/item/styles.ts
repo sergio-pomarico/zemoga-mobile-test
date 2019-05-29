@@ -32,6 +32,10 @@ const styles = StyleSheet.create({
     color: Colors.dividerColor,
     fontSize: 25,
     marginLeft: 12,
+  },
+  trash:{
+    color: Colors.red,
+    fontSize: 25,
   }
 });
 
