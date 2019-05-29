@@ -7,7 +7,7 @@ export interface Comment {
 }
 
 export interface Post {
-  content: string;
+  body: string;
   id: number;
   title: string;
   userId: number;

@@ -16,4 +16,9 @@ export const getPostsFailure = (error: string) => ({
   type: PostsActionsType.GET_POSTS_ERROR,
 });
 
+export const selectPost = (post: Post) => ({
+  post,
+  type: PostsActionsType.SELECT_POST,
+});
+
 

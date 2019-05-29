@@ -6,7 +6,9 @@ const Colors = {
     "accentColor" : "#009688",
     "primaryTextColor" :   "#212121",
     "secondaryTextColor" : "#757575",
-    "dividerColor" : "#BDBDBD"
+    "dividerColor" : "#BDBDBD",
+    "yellow": "#FFEB3B",
+    "gray": "#F5F5F5"
 }
 
 export default Colors

@@ -2,6 +2,7 @@ import { PostsActionsType } from './types';
 import { Action } from '../../Interfaces/types';
 import { Post } from '../../Interfaces/models';
 
+import { updateArray } from '../../Utils/Helpers'
 
 export interface PostsDataState {
   loading: boolean;
@@ -33,6 +34,14 @@ export default function postsReducer(
     case PostsActionsType.GET_POSTS_ERROR: {
       const { error } = action;
       return { ...state, loading: false, error };
+    }
+
+    case PostsActionsType.SELECT_POST: {
+      const { post } = action;
+      const { posts } = state
+      const postSelected = { ...post, seen: true };
+      const postsUpdated = updateArray(posts, postSelected);
+      return { ...state, posts: postsUpdated, post: postSelected };
     }
 
     default:

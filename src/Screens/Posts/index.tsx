@@ -2,11 +2,13 @@ import React, { Component, Dispatch } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Post } from '../../Interfaces/models';
-import { getPosts } from '../../Store/posts/actions';
+import { getPosts, selectPost } from '../../Store/posts/actions';
 
 import List from './components/list'
+import styles from './styles'
 
 interface State {
   selectedIndex: number;
@@ -24,6 +26,18 @@ class PostsScreen extends Component<Props>  {
     this.state = {};
   }
 
+  static navigationOptions = ({ navigation }: any) => {
+    return {
+      headerTitle: 'Posts',
+      headerRight: (
+        <Icon
+          name={'refresh'}
+          style={styles.icon}
+        />
+      ),
+    };
+  };
+
   componentDidMount() {
     this.getPostData();
   }
@@ -33,23 +47,21 @@ class PostsScreen extends Component<Props>  {
     dispatch(getPosts())
   }
 
+  handleNavigation = (post: Post) => {
+    const { navigation, dispatch } = this.props
+    dispatch(selectPost(post))
+    navigation.navigate('Post');
+  }
+
   render() {
     const { posts } = this.props;
     return (
       <View style={styles.container}>
-        <List posts={posts}/>
+        <List posts={posts} handleNavigation={this.handleNavigation}/>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 
 const mapStateToProps = ({ posts }: any) => ({

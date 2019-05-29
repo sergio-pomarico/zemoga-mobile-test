@@ -8,7 +8,8 @@ import {
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
 
-import { Post } from '../../../Interfaces/models';
+import { Post } from '../../../../Interfaces/models';
+import styles from './styles'
 
 interface State {
   selectedIndex: number;
@@ -19,6 +20,7 @@ interface Props {
   dispatch: Dispatch<AnyAction>;
   post: Post;
   index: number;
+  selectPost: (post: Post) => void;
 }
 
 class Item extends Component<Props, State> {
@@ -33,15 +35,15 @@ class Item extends Component<Props, State> {
   }
 
   render() {
-    const { post } = this.props
+    const { post, selectPost } = this.props
     return (
-      <View>
+      <TouchableOpacity style={styles.item} onPress={() => selectPost(post)}>
         <View>
           <Text>
             {post.title}
           </Text>
         </View>
-      </View>
+      </TouchableOpacity>
     );
   }
 }
