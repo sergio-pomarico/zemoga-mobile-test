@@ -9,7 +9,8 @@ const Colors = {
     "dividerColor" : "#BDBDBD",
     "yellow": "#FFEB3B",
     "gray": "#F5F5F5",
-    "red": "#D32F2F"
+    "red": "#D32F2F",
+    "blue": "#2196F3"
 }
 
 export default Colors

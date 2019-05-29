@@ -39,7 +39,7 @@ class List extends Component<Props, State> {
   render() {
     const { posts } = this.props;
     return (
-      <>
+      <View style={styles.container}>
       { posts.length === 0 && 
         <View style={styles.containerEmptyState}>
           <Icon
@@ -59,17 +59,12 @@ class List extends Component<Props, State> {
           extraData={posts.length}
         />
       }
-      </>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  loading: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   containerEmptyState: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -85,6 +80,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
     color: Colors.dividerColor,
+  },
+  container: {
+    flex: 1
   }
 });
 
