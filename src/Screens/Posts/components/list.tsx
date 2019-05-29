@@ -1,5 +1,6 @@
 import React, { Component, ReactFragment } from 'react';
-import { View, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Post } from '../../../Interfaces/models';
 import { Colors } from '../../../Themes'
 import Item from './item'
@@ -40,8 +41,14 @@ class List extends Component<Props, State> {
     return (
       <>
       { posts.length === 0 && 
-        <View style={styles.loading}>
-          <ActivityIndicator color={Colors.accentColor} size="large"/>
+        <View style={styles.containerEmptyState}>
+          <Icon
+            name={'error'}
+            style={styles.emptyPostsIcon}
+          />
+          <Text style={styles.emptyPostsText}>
+            No posts to show
+          </Text>
         </View>
       }
       {posts.length !== 0 && 
@@ -62,6 +69,22 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  containerEmptyState: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+  },
+  emptyPostsIcon: {
+    fontSize: 60,
+    color: Colors.dividerColor,
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  emptyPostsText: {
+    fontSize: 18,
+    textAlign: 'center',
+    color: Colors.dividerColor,
   }
 });
 

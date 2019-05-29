@@ -10,11 +10,12 @@ import { getUser } from '../../Store/users/actions'
 import { getComments } from '../../Store/comments/actions'
 
 import List from './components/list'
+import Tabs from './components/tabs'
 import styles from './styles'
 
 interface State {
   selectedIndex: number;
-  favoritePosts: Post[] | undefined;
+  favoritePosts?: Post[] | undefined;
 }
 interface Props {
   posts: any[];
@@ -30,7 +31,6 @@ class PostsScreen extends Component<Props, State>  {
     super(props);
     this.state = {
       selectedIndex: 0,
-      favoritePosts: []
     };
     this.props.navigation.setParams({
       refreshFeed: this.refreshFeed,
@@ -78,12 +78,25 @@ class PostsScreen extends Component<Props, State>  {
     navigation.navigate('Post');
   }
 
+  filterPosts = (selectedIndex: number) => {
+    const { posts } = this.props;
+    let favoritePosts = undefined;
+    if (selectedIndex === 1) {
+      favoritePosts = posts.filter((post: Post) => post.favorite);
+    }
+    this.setState({ selectedIndex, favoritePosts });
+  }
+
   render() {
     const { posts } = this.props;
-    const havePost = posts.length > 0
+    const { favoritePosts, selectedIndex } = this.state;
+    const postsData = favoritePosts || posts;
+    const havePost = postsData.length > 0
+
     return (
       <View style={styles.container}>
-        <List posts={posts} handleNavigation={this.handleNavigation}/>
+        <Tabs index={selectedIndex} platform={Platform.OS} onCangeTab={this.filterPosts} />
+        <List posts={postsData} handleNavigation={this.handleNavigation}/>
         {havePost && isAndroid && (
           <TouchableOpacity
             style={styles.fabButton}
