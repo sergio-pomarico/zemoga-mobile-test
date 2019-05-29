@@ -21,4 +21,18 @@ export const selectPost = (post: Post) => ({
   type: PostsActionsType.SELECT_POST,
 });
 
+export const toggleFavoriteInPost = (post: Post) => ({
+  post,
+  type: PostsActionsType.TOGGLE_AS_FAVORITE,
+});
+
+export const deletePost = (post: Post) => ({
+  post,
+  type: PostsActionsType.DELETE_POST,
+});
+
+export const deleteAllPosts = () => ({
+  type: PostsActionsType.DELETE_ALL_POSTS,
+});
+
 

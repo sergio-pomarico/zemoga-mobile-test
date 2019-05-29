@@ -2,7 +2,7 @@ import { PostsActionsType } from './types';
 import { Action } from '../../Interfaces/types';
 import { Post } from '../../Interfaces/models';
 
-import { updateArray } from '../../Utils/Helpers'
+import { updateArray, deleteInArray } from '../../Utils/Helpers'
 
 export interface PostsDataState {
   loading: boolean;
@@ -42,6 +42,24 @@ export default function postsReducer(
       const postSelected = { ...post, seen: true };
       const postsUpdated = updateArray(posts, postSelected);
       return { ...state, posts: postsUpdated, post: postSelected };
+    }
+
+    case PostsActionsType.TOGGLE_AS_FAVORITE: {
+      const { post } = action;
+      const postSelected = { ...post, favorite: !post.favorite };
+
+      const posts = updateArray(state.posts, postSelected);
+      return { ...state, posts, post: postSelected };
+    }
+
+    case PostsActionsType.DELETE_POST: {
+      const { post } = action;
+      const posts = deleteInArray(state.posts, post);
+      return { ...state, posts };
+    }
+
+    case PostsActionsType.DELETE_ALL_POSTS: {
+      return { ...state, posts: [] };
     }
 
     default:

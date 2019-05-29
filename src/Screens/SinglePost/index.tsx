@@ -6,6 +6,7 @@ import { NavigationScreenProp } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import { Post, User, Comment } from '../../Interfaces/models';
+import { toggleFavoriteInPost } from '../../Store/posts/actions';
 import styles from './styles'
 import { Colors } from '../../Themes';
 
@@ -22,6 +23,9 @@ class SinglePostScreen extends React.Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.state = {};
+    this.props.navigation.setParams({
+      toggleFavoriteInPost: this.toggleFavoriteInPost,
+    });
   }
 
   static navigationOptions = ({ navigation }: any) => {
@@ -29,13 +33,26 @@ class SinglePostScreen extends React.Component<Props, State> {
       headerTitle: 'Post',
       headerRight: (
         <Icon
-          // onPress={navigation.getParam('toggleFavoriteInPost')}
-          name={'star-border'}
+          onPress={navigation.getParam('toggleFavoriteInPost')}
+          name={navigation.getParam('isFavorite') ? 'star' : 'star-border'}
           style={styles.icon}
         />
       ),
     };
   };
+
+  toggleFavoriteInPost = () => {
+    const { post, dispatch } = this.props;
+    dispatch(toggleFavoriteInPost(post as Post));
+  };
+
+  componentWillReceiveProps({ post }: any) {
+    if (JSON.stringify(post) !== JSON.stringify(this.props.post)) {
+      this.props.navigation.setParams({
+        isFavorite: post.favorite,
+      });
+    }
+  }
 
   render() {
     const { post, user, comments } = this.props

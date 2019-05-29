@@ -8,7 +8,8 @@ const Colors = {
     "secondaryTextColor" : "#757575",
     "dividerColor" : "#BDBDBD",
     "yellow": "#FFEB3B",
-    "gray": "#F5F5F5"
+    "gray": "#F5F5F5",
+    "red": "#D32F2F"
 }
 
 export default Colors

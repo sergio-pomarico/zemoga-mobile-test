@@ -1,14 +1,13 @@
 import React, { Component, Dispatch } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { View, Platform, TouchableOpacity, Text } from 'react-native';
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Post } from '../../Interfaces/models';
-import { getPosts, selectPost } from '../../Store/posts/actions';
+import { getPosts, selectPost, deleteAllPosts } from '../../Store/posts/actions';
 import { getUser } from '../../Store/users/actions'
 import { getComments } from '../../Store/comments/actions'
-
 
 import List from './components/list'
 import styles from './styles'
@@ -23,10 +22,19 @@ interface Props {
   dispatch: Dispatch<AnyAction>;
 }
 
-class PostsScreen extends Component<Props>  {
+const isIOS= Platform.OS === 'ios';
+const isAndroid = Platform.OS === 'android';
+
+class PostsScreen extends Component<Props, State>  {
   constructor(props: any) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedIndex: 0,
+      favoritePosts: []
+    };
+    this.props.navigation.setParams({
+      refreshFeed: this.refreshFeed,
+    });
   }
 
   static navigationOptions = ({ navigation }: any) => {
@@ -36,6 +44,7 @@ class PostsScreen extends Component<Props>  {
         <Icon
           name={'refresh'}
           style={styles.icon}
+          onPress={navigation.getParam('refreshFeed')}
         />
       ),
     };
@@ -50,6 +59,17 @@ class PostsScreen extends Component<Props>  {
     dispatch(getPosts())
   }
 
+  refreshFeed = () => {
+    const { dispatch } = this.props;
+    dispatch(getPosts());
+  };
+
+  deleteAllPosts() {
+    const { dispatch } = this.props;
+    dispatch(deleteAllPosts());
+  }
+
+
   handleNavigation = (post: Post) => {
     const { navigation, dispatch } = this.props
     dispatch(selectPost(post))
@@ -60,9 +80,26 @@ class PostsScreen extends Component<Props>  {
 
   render() {
     const { posts } = this.props;
+    const havePost = posts.length > 0
     return (
       <View style={styles.container}>
         <List posts={posts} handleNavigation={this.handleNavigation}/>
+        {havePost && isAndroid && (
+          <TouchableOpacity
+            style={styles.fabButton}
+            onPress={() => this.deleteAllPosts()}
+          >
+            <Icon name={'delete'} style={styles.deleteIcon} />
+          </TouchableOpacity>
+        )}
+        {havePost && isIOS && (
+          <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={() => this.deleteAllPosts()}
+          >
+            <Text style={styles.deleteButtonText}>Delete All</Text>
+          </TouchableOpacity>
+        )}
       </View>
     );
   }
