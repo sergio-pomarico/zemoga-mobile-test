@@ -32,12 +32,12 @@ npm run android # use npm
 
 ## Third-party libs
 
-- [`axios:`](https://github.com/axios/axios) 
-- [`react-native-gesture-handler:`](https://github.com/kmagiera/react-native-gesture-handler) 
-- [`react-native-vector-icons:`](https://github.com/oblador/react-native-vector-icons) 
-- [`react-navigation:`](https://reactnavigation.org/)
-- [`redux:`](https://github.com/reduxjs/redux)
-- [`react-redux:`](https://github.com/reduxjs/react-redux)
-- [`redux-saga:`](https://redux-saga.js.org/)
+- [`axios`](https://github.com/axios/axios) 
+- [`react-native-gesture-handler`](https://github.com/kmagiera/react-native-gesture-handler) 
+- [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons) 
+- [`react-navigation`](https://reactnavigation.org/)
+- [`redux`](https://github.com/reduxjs/redux)
+- [`react-redux`](https://github.com/reduxjs/react-redux)
+- [`redux-saga`](https://redux-saga.js.org/)
 - [`react-native-material-tabs`](https://github.com/iRoachie/react-native-material-tabs)
 - [`react-native-vector-icons`](https://github.com/oblador/react-native-vector-icons)
