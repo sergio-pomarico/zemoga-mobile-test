@@ -3,7 +3,7 @@ export interface Comment {
   id: number;
   name: string;
   email: string;
-  content: string;
+  body: string;
 }
 
 export interface Post {

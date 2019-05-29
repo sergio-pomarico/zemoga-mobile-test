@@ -6,6 +6,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Post } from '../../Interfaces/models';
 import { getPosts, selectPost } from '../../Store/posts/actions';
+import { getUser } from '../../Store/users/actions'
+import { getComments } from '../../Store/comments/actions'
+
 
 import List from './components/list'
 import styles from './styles'
@@ -50,6 +53,8 @@ class PostsScreen extends Component<Props>  {
   handleNavigation = (post: Post) => {
     const { navigation, dispatch } = this.props
     dispatch(selectPost(post))
+    dispatch(getUser(post.userId));
+    dispatch(getComments(post.id))
     navigation.navigate('Post');
   }
 

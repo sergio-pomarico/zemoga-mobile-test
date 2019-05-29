@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: Metrics.fontSize,
     color: Colors.primaryTextColor,
-    fontWeight: Metrics.fontWeightBold,
+    fontWeight: '600',
     marginBottom: 8,
     marginTop: 20,
     paddingHorizontal: Metrics.marginHorizontal,
@@ -27,13 +27,31 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
     marginTop: 20,
     marginBottom: 8,
-    fontWeight: Metrics.fontWeightBold,
+    fontWeight: '600',
   },
   content: {
     fontSize: 14,
     lineHeight: 18,
     color: Colors.primaryTextColor,
     paddingHorizontal: Metrics.marginHorizontal,
+  },
+  commentContainer: {
+    marginHorizontal: Metrics.marginHorizontal,
+  },
+  commentText: {
+    paddingVertical: 20,
+    color: Colors.primaryTextColor,
+    fontSize: 14,
+  },
+  separator: {
+    height: 1,
+    backgroundColor: Colors.dividerColor,
+    width: '100%',
+  },
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 

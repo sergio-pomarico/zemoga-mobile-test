@@ -11,14 +11,18 @@ import { all } from '@redux-saga/core/effects';
 
 // Reducers & Sagas
 import { postsReducer, postsSagas } from './posts';
+import { usersReducer, usersSagas } from './users';
+import { commentsReducer, commentsSagas } from './comments';
 
 const rootReducers: Reducer<any, AnyAction> = combineReducers({
   posts: postsReducer,
+  user: usersReducer,
+  comments: commentsReducer
 });
 
 // Saga
 function* rootSaga() {
-  yield all([...postsSagas]);
+  yield all([...postsSagas, ...usersSagas, ...commentsSagas]);
 }
 
 const sagaMiddleware = createSagaMiddleware();

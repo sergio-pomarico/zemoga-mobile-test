@@ -1,6 +1,7 @@
 import React, { Component, ReactFragment } from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, ActivityIndicator, FlatList, StyleSheet } from 'react-native';
 import { Post } from '../../../Interfaces/models';
+import { Colors } from '../../../Themes'
 import Item from './item'
 
 interface State {
@@ -37,14 +38,31 @@ class List extends Component<Props, State> {
   render() {
     const { posts } = this.props;
     return (
-      <FlatList
-        keyExtractor={this._keyExtractor}
-        data={posts}
-        renderItem={({ item, index }) => this.renderItems(item, index)}
-        extraData={posts.length}
-      />
+      <>
+      { posts.length === 0 && 
+        <View style={styles.loading}>
+          <ActivityIndicator color={Colors.accentColor} size="large"/>
+        </View>
+      }
+      {posts.length !== 0 && 
+        <FlatList
+          keyExtractor={this._keyExtractor}
+          data={posts}
+          renderItem={({ item, index }) => this.renderItems(item, index)}
+          extraData={posts.length}
+        />
+      }
+      </>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});
 
 export default List;
